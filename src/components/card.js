@@ -33,4 +33,4 @@ function deleteCard (el) {
 
 function likeCard (evt) {
     evt.target.classList.toggle('card__like-button_is-active')
-}
+};
