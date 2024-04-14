@@ -4,7 +4,6 @@ import { openModal, closeModal } from './components/modal.js'
 import { createCard, deleteCard } from './components/card.js'
 
 const placeList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
 const openImg = document.querySelector('.popup_type_image');
 const openEditButton = document.querySelector('.profile__edit-button');
 const editOpenPopup = document.querySelector('.popup_type_edit');
@@ -22,9 +21,6 @@ const cardNameInput = formPlace.querySelector('.popup__input_type_card-name');
 const cardlinkInput = formPlace.querySelector('.popup__input_type_url');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-const newCardElement = cardTemplate.querySelector('.card').cloneNode(true);
-const newCardImg = newCardElement.querySelector('.card__image');
-const newCardTitle = newCardElement.querySelector('.card__title');
 
 initialCards.forEach(function(card) {
     placeList.append(createCard(card.link, card.name, deleteCard, openCardImage));
@@ -64,8 +60,6 @@ formEdit.addEventListener('submit', handleProfileFormSubmit);
 
 function addNewFormCard(evt) {
     evt.preventDefault();
-    newCardTitle.textContent = cardNameInput.value;
-    newCardImg.src = cardlinkInput.value; 
     placeList.prepend(createCard(cardlinkInput.value, cardNameInput.value, deleteCard, openCardImage));
     formPlace.reset();
     closeModal();
