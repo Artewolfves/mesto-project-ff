@@ -10,15 +10,14 @@ function openModal(openedPopup) {
 
 //закртиые попапа
 function closeModal() {
-    const openPopup = document.querySelector('.popup_is-opened')
+    const openPopup = document.querySelector('.popup_is-opened');
     openPopup.classList.remove('popup_is-opened');
     document.removeEventListener('keydown', handleEcsClose);
     openPopup.removeEventListener('click', handleOwerlayClose);
-    
 }
 
 function handleEcsClose(evt) {
-    const openPopup = document.querySelector('.popup_is-opened')
+    const openPopup = document.querySelector('.popup_is-opened');
     if (evt.key === 'Escape') {
         closeModal(openPopup);
     }
@@ -26,6 +25,6 @@ function handleEcsClose(evt) {
 
 function handleOwerlayClose(evt) {
     if(evt.target === evt.currentTarget) {
-        closeModal(evt.target)
+        closeModal(evt.target);
     }
 }

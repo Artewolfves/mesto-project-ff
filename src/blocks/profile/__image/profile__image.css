@@ -1,3 +1,4 @@
+
 .profile__image {
   width: 120px;
   height: 120px;
@@ -7,6 +8,8 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  position: relative;
+  
 }
 
 @media screen and (max-width: 740px) {
@@ -20,3 +23,24 @@
     margin-right: 0;
   }
 }
+
+
+.profile__image-button {
+  background: transparent url('../../../images/edit-icon.svg') center no-repeat;
+  background-size: 26px 26px;
+  border: none;
+  align-self: center;
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  transition: opacity .3s;
+  height: 100%;
+  width: 100%;
+}
+
+/* Определяем стиль для наведения курсора на аватар*/
+.profile__image:hover .profile__image-button {
+  opacity: 1;
+  transition: opacity .3s;
+  background-color:rgba(0, 0, 0, 0.8);
+} 
