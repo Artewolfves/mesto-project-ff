@@ -45,7 +45,10 @@
         <input type="text" id="description-input" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-Я\s\-]*$" 
         placeholder="Занятие" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
         <span class="popup__input-error description-input-error"></span>
-        <button type="submit" class="button popup__button">Сохранить</button>
+        <button type="submit" class="button popup__button">
+          <span class="popup__button_text popup_button_text-is-visible">Сохранить</span>
+          <span class="popup__button_text-loading">Сохранение...</span>
+        </button>
       </form>
     </div>
   </div>
@@ -59,7 +62,10 @@
         <span class="popup__input-error place-name-input-error"></span>
         <input type="url" id="link-input" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
         <span class="popup__input-error link-input-error"></span>
-        <button type="submit" class="button popup__button">Сохранить</button>
+        <button type="submit" class="button popup__button">
+          <span class="popup__button_text popup_button_text-is-visible">Сохранить</span>
+          <span class="popup__button_text-loading">Сохранение...</span>
+        </button>
       </form>
     </div>
   </div>
@@ -78,7 +84,10 @@
       <form class="popup__form" name="new-avatar" novalidate>
         <input type="url" id="avatar-input" name="avatar" class="popup__input popup__input_type_url-avatar" placeholder="Ссылка на картинку" required>
         <span class="popup__input-error avatar-input-error"></span>
-        <button type="submit" class="button popup__button">Сохранить</button>
+        <button type="submit" class="button popup__button">
+          <span class="popup__button_text popup_button_text-is-visible">Сохранить</span>
+          <span class="popup__button_text-loading">Сохранение...</span>
+        </button>
       </form>
     </div>
   </div>

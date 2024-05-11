@@ -1,7 +1,7 @@
 export {createCard, deleteCard }
 import { likeCardServer, unLikeCardServer, deleteCardServer } from './api.js'
 
-function createCard(linkValue, nameValue, deleteCard, openCardImage, userId, ownerId, cardId, likes, myLikes) {
+function createCard(linkValue, nameValue, deleteCard, openCardImage, userId, ownerId, cardId, likes) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const cardDeleteButton = cardElement.querySelector('.card__delete-button');
@@ -10,10 +10,13 @@ function createCard(linkValue, nameValue, deleteCard, openCardImage, userId, own
     cardImg.src = linkValue;
     cardImg.alt = nameValue;
     cardTitle.textContent = nameValue;
+    const myLikes = likes.some((likeObj) => {
+        return likeObj._id === userId
+    });
+
     if (userId === ownerId) {
-        cardDeleteButton.style.display = 'inline-block';
-        cardDeleteButton.addEventListener('click', () => deleteCard(cardElement));
-        cardDeleteButton.addEventListener('click', () => deleteCardServer(cardId));
+        cardDeleteButton.style.display = 'block';
+        cardDeleteButton.addEventListener('click', function () {deleteCardServer(cardId), deleteCard(cardElement)})
     }
     else {
         cardDeleteButton.style.display = 'none'
@@ -22,7 +25,7 @@ function createCard(linkValue, nameValue, deleteCard, openCardImage, userId, own
     // лайк карточки
     const likeButton = cardElement.querySelector('.card__like-button');
     if (myLikes) likeButton.classList.toggle('card__like-button_is-active')
-    let likeCount = cardElement.querySelector('.like-count');
+    const likeCount = cardElement.querySelector('.like-count');
     likeCount.textContent = likes ? likes.length : 0;
     likeButton.addEventListener('click', (evt) => handleLikeClick(evt, cardId, likeCount));
 
