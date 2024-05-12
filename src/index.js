@@ -111,23 +111,17 @@ formPlace.addEventListener('submit', (evt) => {
   })
 });
 
-// функция для аватара
-function handleAvatarFormSubmit(evt, link) {
-  evt.preventDefault(); 
-  const avatarInputValue = link;
-  avatarlinkInput.src = avatarInputValue;
-  closeModal(popupAddNewAvatar);
-}
-
 // смена аватара на сервере
 formAvatar.addEventListener('submit',(evt) => {
-  handleAvatarFormSubmit(evt),
+  evt.preventDefault();
+  // handleAvatarFormSubmit(evt),
   changeTextSubmitButton(evt)
   updateAvatar(avatarlinkInput.value)
   .then((data) => {
     const userAvatar = data.avatar;
     avatarElement.style.backgroundImage = `url(${userAvatar})`;
     console.log(data)
+    closeModal(popupAddNewAvatar);
   })
   .catch((err) => {
     console.log(err)

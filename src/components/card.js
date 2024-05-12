@@ -15,8 +15,15 @@ function createCard(linkValue, nameValue, deleteCard, openCardImage, userId, own
     });
 
     if (userId === ownerId) {
-        cardDeleteButton.style.display = 'block';
-        cardDeleteButton.addEventListener('click', function () {deleteCardServer(cardId), deleteCard(cardElement)})
+        cardElement.classList.add('icon-delete');
+        cardDeleteButton.addEventListener('click', function () {
+            deleteCardServer(cardId)
+            .then(() => {
+                deleteCard(cardElement)})
+            .catch((err) => {
+                console.log(err);
+            })
+        })
     }
     else {
         cardDeleteButton.style.display = 'none'
@@ -38,8 +45,8 @@ return cardElement;
 };
 
 // функция удаление карточки
-function deleteCard (el) {
-    el.remove();
+function deleteCard (el) { 
+    el.remove()
 };
 
 // функция лайка карточки
