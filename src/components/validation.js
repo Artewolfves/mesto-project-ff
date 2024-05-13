@@ -65,11 +65,9 @@ if (hasInvalidInput(inputList, validationConfig)) {
 
 // Функция очистки ошибок валидации 
 const clearValidation = (formEl, validationConfig) => {
-  formEl.reset();
   const inputList = Array.from(formEl.querySelectorAll(validationConfig.inputSelector));
   const buttonElement = formEl.querySelector(validationConfig.submitButtonSelector);
   inputList.forEach((inputElement) => {
-    inputElement.value = "";
     hideInputError(formEl, inputElement, validationConfig);
   });
   toggleButtonState(inputList, buttonElement, validationConfig);

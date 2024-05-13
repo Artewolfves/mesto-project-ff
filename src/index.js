@@ -4,13 +4,12 @@ import { createCard, deleteCard } from './components/card.js'
 import { enableValidation, clearValidation } from './components/validation.js'
 import { updateAvatar, addCardServer, getInfoProfile, updateProfile, loadCards } from './components/api.js'
 
-const placeList = document.querySelector('.places__list');
-const popupImageOpened = document.querySelector('.popup_type_image');
+const place = document.querySelector('.places__list');
+const popupImage = document.querySelector('.popup_type_image');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
-const popupEditOpen = document.querySelector('.popup_type_edit');
+const popupEdit = document.querySelector('.popup_type_edit');
 const buttonAddCard  =  document.querySelector('.profile__add-button');
 const popupAddNewCard = document.querySelector('.popup_type_new-card');
-const formPopup = document.querySelector('.popup__form');
 const formEdit = document.querySelector('[name="edit-profile"]'); 
 const nameInput = formEdit.querySelector('.popup__input_type_name');
 const descriptionInput = formEdit.querySelector('.popup__input_type_description');
@@ -19,7 +18,7 @@ const descriptionProfile = document.querySelector('.profile__description');
 const formPlace = document.querySelector('[name="new-place"]'); 
 const cardNameInput = formPlace.querySelector('.popup__input_type_card-name');
 const cardlinkInput = formPlace.querySelector('.popup__input_type_url');
-const popupImage = document.querySelector('.popup__image');
+const image = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const addPopupAvatarButton =  document.querySelector('.profile__image-button');
 const popupAddNewAvatar = document.querySelector('.popup_type_new-avatar');
@@ -42,10 +41,10 @@ popups.forEach(item => item.classList.add('popup_is-animated'));
 
 // откртиые модалки профиля
 buttonEditProfile.addEventListener('click', function() {
-    openModal(popupEditOpen)
+    openModal(popupEdit)
     clearValidation(formEdit, validationConfig);
-    formPopup.querySelector('input[name="name"]').value = nameProfile.textContent;
-    formPopup.querySelector('input[name="description"]').value = descriptionProfile.textContent;
+    nameInput.value = nameProfile.textContent;
+    descriptionInput.value = descriptionProfile.textContent;
 });
 
 // открытие модалки карточек
@@ -65,10 +64,10 @@ addPopupAvatarButton.addEventListener('click', function() {
 
 // откртие картинок
 function openCardImage(link, name) {
-  popupImage.src = link;
-  popupImage.alt = name;
+  image.src = link;
+  image.alt = name;
   popupCaption.textContent = name;
-  openModal(popupImageOpened);
+  openModal(popupImage);
 }
 
 // редактирование инф на сервере
@@ -77,12 +76,9 @@ formEdit.addEventListener('submit',(evt) => {
   changeTextSubmitButton(evt)
   updateProfile(nameInput.value, descriptionInput.value)
   .then((data) => {
-    const userName = data.name;
-    const userAbout = data.about;
-    nameProfile.textContent = userName;
-    descriptionProfile.textContent = userAbout;
-    console.log(data)
-    closeModal(popupEditOpen); 
+    nameProfile.textContent = data.name;
+    descriptionProfile.textContent = data.about;
+    closeModal(popupEdit); 
   })
   .catch((err) => {
     console.log(err)
@@ -98,8 +94,7 @@ formPlace.addEventListener('submit', (evt) => {
   changeTextSubmitButton(evt)
   addCardServer(cardlinkInput.value, cardNameInput.value)
   .then((data) => {
-    placeList.prepend(createCard(data.link, data.name, deleteCard, openCardImage, userId, data.owner._id, data._id, data.likes))
-    console.log(data);
+    place.prepend(createCard(data.link, data.name, deleteCard, openCardImage, userId, data.owner._id, data._id, data.likes))
     formPlace.reset();
     closeModal(popupAddNewCard);
   })
@@ -120,7 +115,6 @@ formAvatar.addEventListener('submit',(evt) => {
   .then((data) => {
     const userAvatar = data.avatar;
     avatarElement.style.backgroundImage = `url(${userAvatar})`;
-    console.log(data)
     closeModal(popupAddNewAvatar);
   })
   .catch((err) => {
@@ -142,9 +136,8 @@ Promise.all( [ getInfoProfile(), loadCards() ] )
     nameProfile.textContent = userName;
     descriptionProfile.textContent = userAbout;
     avatarElement.style.backgroundImage = `url(${userAvatar})`;
-
     cardRes.forEach(function(card) {
-  placeList.append(createCard(card.link, card.name, deleteCard, openCardImage, userId, card.owner._id, card._id, card.likes));
+      place.append(createCard(card.link, card.name, deleteCard, openCardImage, userId, card.owner._id, card._id, card.likes));
   });
 })
   .catch( (err) => {
