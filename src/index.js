@@ -86,7 +86,6 @@ formEdit.addEventListener('submit',(evt) => {
   .finally(() => {
     changeTextSubmitButton(evt)
   })
-
 });
 
 formPlace.addEventListener('submit', (evt) => {
@@ -109,7 +108,6 @@ formPlace.addEventListener('submit', (evt) => {
 // смена аватара на сервере
 formAvatar.addEventListener('submit',(evt) => {
   evt.preventDefault();
-  // handleAvatarFormSubmit(evt),
   changeTextSubmitButton(evt)
   updateAvatar(avatarlinkInput.value)
   .then((data) => {
